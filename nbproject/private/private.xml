@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="RedPrepaid"/>
+        <group name="Motum"/>
+        <group name="Factura"/>
+        <group name="Otros"/>
+        <group name="Bitacora"/>
+        <group name="Arsis">
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/hibernate.cfg.xml</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/catalogos/EquipoEditor.java</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/bd/base_datos.sql</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/AtributosEditor.java</file>
+        </group>
+    </open-files>
+</project-private>
