@@ -23,89 +23,100 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "equipo_programa")
 public class EquipoPrograma2 implements Serializable {
 
-	private static final long serialVersionUID = 14L;
+    private static final long serialVersionUID = 14L;
+    public static final int NORMAL = 0;
+    public static final int NOTIFICADO = 1;
 
-	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	private String id;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
-	@ManyToOne
-	@JoinColumn(name = "id_equipo")
-	private EquipoComputo equipo;
-	@ManyToOne
-	@JoinColumn(name = "id_programa")
-	private Programa programa;
-	@Column
-	@Temporal(TemporalType.DATE)
-	private Date vigencia;
+    @ManyToOne
+    @JoinColumn(name = "id_equipo")
+    private EquipoComputo equipo;
+    @ManyToOne
+    @JoinColumn(name = "id_programa")
+    private Programa programa;
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date vigencia;
+    @Column
+    private Integer estado;
 
-	public EquipoPrograma2() {
-	}
+    public EquipoPrograma2() {
+        estado = NORMAL;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public EquipoComputo getEquipo() {
-		return equipo;
-	}
+    public EquipoComputo getEquipo() {
+        return equipo;
+    }
 
-	public void setEquipo(EquipoComputo equipo) {
-		this.equipo = equipo;
-	}
+    public void setEquipo(EquipoComputo equipo) {
+        this.equipo = equipo;
+    }
 
-	public Programa getPrograma() {
-		return programa;
-	}
+    public Programa getPrograma() {
+        return programa;
+    }
 
-	public void setPrograma(Programa programa) {
-		this.programa = programa;
-	}
+    public void setPrograma(Programa programa) {
+        this.programa = programa;
+    }
 
-	public Date getVigencia() {
-		return vigencia;
-	}
+    public Date getVigencia() {
+        return vigencia;
+    }
 
-	public void setVigencia(Date vigencia) {
-		this.vigencia = vigencia;
-	}
-	
-	@Override
-	public String toString() {
-		return String.format("%s (%s)", programa, Format.DATE.format(vigencia));
-	}
+    public void setVigencia(Date vigencia) {
+        this.vigencia = vigencia;
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 3;
-		hash = 37 * hash + Objects.hashCode(this.equipo);
-		hash = 37 * hash + Objects.hashCode(this.programa);
-		return hash;
-	}
+    public Integer getEstado() {
+        return estado;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final EquipoPrograma2 other = (EquipoPrograma2) obj;
-		if (!Objects.equals(this.equipo, other.equipo)) {
-			return false;
-		}
-		if (!Objects.equals(this.programa, other.programa)) {
-			return false;
-		}
-		return true;
-	}
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
 
-	
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", programa, Format.DATE.format(vigencia));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.equipo);
+        hash = 37 * hash + Objects.hashCode(this.programa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EquipoPrograma2 other = (EquipoPrograma2) obj;
+        if (!Objects.equals(this.equipo, other.equipo)) {
+            return false;
+        }
+        if (!Objects.equals(this.programa, other.programa)) {
+            return false;
+        }
+        return true;
+    }
 
 }

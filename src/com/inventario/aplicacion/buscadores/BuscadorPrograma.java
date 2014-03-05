@@ -73,10 +73,11 @@ public class BuscadorPrograma extends Buscador<Programa> {
         jlProgramas = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Buscador de Áreas");
+        setTitle("Programas");
 
         jPanel3.setPreferredSize(new java.awt.Dimension(554, 40));
 
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventario/iconos/search.png"))); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.setPreferredSize(new java.awt.Dimension(120, 36));
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +118,7 @@ public class BuscadorPrograma extends Buscador<Programa> {
         jPanel2.setPreferredSize(new java.awt.Dimension(542, 40));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 2));
 
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventario/iconos/block.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.setPreferredSize(new java.awt.Dimension(120, 36));
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +128,7 @@ public class BuscadorPrograma extends Buscador<Programa> {
         });
         jPanel2.add(jbCancelar);
 
+        jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventario/iconos/accept.png"))); // NOI18N
         jbAceptar.setText("Aceptar");
         jbAceptar.setPreferredSize(new java.awt.Dimension(120, 36));
         jbAceptar.addActionListener(new java.awt.event.ActionListener() {

@@ -5,7 +5,8 @@ import com.inventario.aplicacion.InventarioApp;
 import com.inventario.datas.DatosGeneral;
 import com.inventario.error.InventarioException;
 import com.inventario.interfaces.Aplicacion;
-import com.inventario.modelo.Empleado;
+import com.inventario.modelo.EquipoComputo;
+import com.inventario.modelo.TipoEquipo;
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -15,39 +16,39 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Buscador de empleados.
+ * Buscador de tipos de equipo.
  * <p>
  * Ok.
  *
  * @author Enrique
  */
-public class BuscadorEmpleado extends Buscador<Empleado> {
+public class BuscadorEquipo extends Buscador<EquipoComputo> {
 	
-	private static final Logger log = LoggerFactory.getLogger(BuscadorEmpleado.class);
+	private static final Logger log = LoggerFactory.getLogger(BuscadorEquipo.class);
 	
 	private DatosGeneral dGeneral;
 	
-	public BuscadorEmpleado(Frame parent, boolean modal) {
+	public BuscadorEquipo(Frame parent, boolean modal) {
 		super(parent, modal);
 	}
 	
-	public BuscadorEmpleado(Dialog parent, boolean modal) {
+	public BuscadorEquipo(Dialog parent, boolean modal) {
 		super(parent, modal);
 	}
 	
-	public static BuscadorEmpleado mostrar(Component padre, Aplicacion app) {
-		BuscadorEmpleado be;
+	public static BuscadorEquipo mostrar(Component padre, Aplicacion app) {
+		BuscadorEquipo bt;
 		Window mw = SwingUtilities.getWindowAncestor(padre);
 		if (mw instanceof Frame) {
-			be = new BuscadorEmpleado((Frame) mw, true);
+			bt = new BuscadorEquipo((Frame) mw, true);
 		} else {
-			be = new BuscadorEmpleado((Dialog) mw, true);
+			bt = new BuscadorEquipo((Dialog) mw, true);
 		}
-		be.initComponents();
-		be.init(app);
-		be.setLocationRelativeTo(padre);
-		be.setVisible(true);
-		return be;
+		bt.initComponents();
+		bt.init(app);
+		bt.setLocationRelativeTo(padre);
+		bt.setVisible(true);
+		return bt;
 	}
 	
 	private void init(Aplicacion app) {
@@ -55,7 +56,7 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
 
 		// Settear
 		modelo = new ModeloLista<>();
-		jlEmpleados.setModel(modelo);
+		jlEquipos.setModel(modelo);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -65,15 +66,15 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
         jPanel3 = new javax.swing.JPanel();
         jbBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jtfNombre = new javax.swing.JTextField();
+        jtfActivoFijo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jbCancelar = new javax.swing.JButton();
         jbAceptar = new javax.swing.JButton();
         jspItems = new javax.swing.JScrollPane();
-        jlEmpleados = new javax.swing.JList();
+        jlEquipos = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Empleados");
+        setTitle("Equipos");
 
         jPanel3.setPreferredSize(new java.awt.Dimension(554, 40));
 
@@ -86,10 +87,10 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
             }
         });
 
-        jLabel1.setText("Nombre");
+        jLabel1.setText("Activo fijo");
         jLabel1.setPreferredSize(new java.awt.Dimension(120, 26));
 
-        jtfNombre.setPreferredSize(new java.awt.Dimension(160, 26));
+        jtfActivoFijo.setPreferredSize(new java.awt.Dimension(160, 26));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -99,7 +100,7 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addComponent(jtfActivoFijo, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -109,7 +110,7 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfActivoFijo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 4, Short.MAX_VALUE))
         );
 
@@ -140,8 +141,8 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
-        jlEmpleados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jspItems.setViewportView(jlEmpleados);
+        jlEquipos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jspItems.setViewportView(jlEquipos);
 
         getContentPane().add(jspItems, java.awt.BorderLayout.CENTER);
 
@@ -150,10 +151,9 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 		try {
-			modelo.setItems(dGeneral.getEmpleados(jtfNombre.getText()));
-			log.info("Modelo {}", modelo.getSize());
+			modelo.setItems(dGeneral.getEquipos(jtfActivoFijo.getText()));
 		} catch (InventarioException ex) {
-			new AppMensaje("No se pudo consultar los empleados", ex).mostrar(this);
+			new AppMensaje("No se pudo consultar los equipos.", ex).mostrar(this);
 		}
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -163,7 +163,7 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
 		try {
-			aceptar(jlEmpleados.getSelectedIndex());
+			aceptar(jlEquipos.getSelectedIndex());
 		} catch (InventarioException ex) {
 			new AppMensaje(ex).mostrar(this);
 		}
@@ -176,9 +176,9 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCancelar;
-    private javax.swing.JList jlEmpleados;
+    private javax.swing.JList jlEquipos;
     private javax.swing.JScrollPane jspItems;
-    private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfActivoFijo;
     // End of variables declaration//GEN-END:variables
 
 }

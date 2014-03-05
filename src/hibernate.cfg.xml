@@ -27,9 +27,9 @@
   <session-factory>
     <!-- Database connection settings -->
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.url">jdbc:mysql://xxx:3306/inventario</property>
-    <property name="connection.username">xxx</property>
-    <property name="connection.password">xxx</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/inventario</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">root</property>
     <property name="current_session_context_class">thread</property>
     <!-- JDBC connection pool (use the built-in) -->
     <property name="connection.pool_size">10</property>
@@ -47,6 +47,7 @@
     <mapping class="com.inventario.modelo.TipoEquipo" />
     <mapping class="com.inventario.modelo.EquipoComputo" />
     <mapping class="com.inventario.modelo.EquipoPrograma2" />
+    <mapping class="com.inventario.modelo.Evento" />
     <!-- No funciona el mapeo directo, tendremos que usar un identificador
     <mapping class="com.inventario.modelo.EquipoProgramaId" />
     <mapping class="com.inventario.modelo.EquipoPrograma" /> -->

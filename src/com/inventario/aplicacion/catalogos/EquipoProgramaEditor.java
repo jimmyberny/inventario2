@@ -12,7 +12,6 @@ import com.inventario.modelo.EquipoPrograma2;
 import com.inventario.util.Format;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.slf4j.Logger;

@@ -23,7 +23,8 @@ public class Evento implements Serializable {
 
     private static final long serialVersionUID = 4L;
 
-    @Id @GeneratedValue(generator = "uuid")
+    @Id
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     @ManyToOne
@@ -37,10 +38,10 @@ public class Evento implements Serializable {
     private String instruccion;
     @Column
     private String observaciones;
-    @Column
+    @Column(name = "fecha_programada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @Column
+    @Column(name = "fecha_realizado")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date fechaRealizado;
 
@@ -109,6 +110,11 @@ public class Evento implements Serializable {
 
     public void setFechaRealizado(Date fechaRealizado) {
         this.fechaRealizado = fechaRealizado;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 
 }

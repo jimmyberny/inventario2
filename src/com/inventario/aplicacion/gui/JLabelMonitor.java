@@ -21,6 +21,10 @@ public class JLabelMonitor extends JLabel implements MonitorViewInterface {
         setPreferredSize(new Dimension(40, 40));
         monitor.addView(this);
     }
+    
+    public void addMonitor(MonitorListener monitor) {
+        monitor.addView(this);
+    }
 
     @Override
     public void changeState(boolean state) {

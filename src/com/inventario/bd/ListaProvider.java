@@ -9,7 +9,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author José Bernardo Gómez-Andrade
+ * @author None
  */
 public abstract class ListaProvider<T> implements DataProvider<T> {
 

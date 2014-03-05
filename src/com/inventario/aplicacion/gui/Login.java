@@ -53,7 +53,9 @@ public class Login extends javax.swing.JPanel implements Vista {
 
 	@Override
 	public void activar() throws InventarioException {
-		// Nada nuevo
+        jpLogin.setVisible(false);
+        jtfUsuario.setText(null);
+        jpfContrasena.setText(null);
 	}
 
 	@Override

@@ -74,7 +74,8 @@ public class Inicio {
 			public void run() {
 				try {
 					// Setting look and feel
-					Object laf = Class.forName(UIManager.getSystemLookAndFeelClassName()).newInstance();
+                    String cnLaf = cfg.getProperty(InventarioApp.KC_LOOK_AND_FEEL, UIManager.getSystemLookAndFeelClassName());
+					Object laf = Class.forName(cnLaf).newInstance();
 					if (laf instanceof LookAndFeel) {
 						UIManager.setLookAndFeel((LookAndFeel) laf);
 					} else if (laf instanceof SubstanceSkin) {

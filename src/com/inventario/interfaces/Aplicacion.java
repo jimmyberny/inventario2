@@ -1,6 +1,7 @@
 package com.inventario.interfaces;
 
 import com.inventario.modelo.Usuario;
+import java.util.Map;
 import org.hibernate.SessionFactory;
 
 /**
@@ -19,4 +20,5 @@ public interface Aplicacion {
     
     public void mostrarTarea(String tarea);
     
+    public Map<String, Object> getBus();
 }

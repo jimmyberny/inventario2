@@ -65,6 +65,7 @@ create table equipo_programa (
 	id_equipo varchar(40) not null,
 	id_programa varchar(40) not null,
 	vigencia datetime null,
+    estado int not null,
 	constraint pk_equipo_programa primary key(id),
 	constraint fk_ep_e_equipo foreign key(id_equipo) references equipo_computo(id),
 	constraint fk_ep_p_programa foreign key(id_programa) references programa(id)
@@ -83,6 +84,8 @@ create table evento (
 	constraint fk_e_ec_equipo foreign key(id_equipo) references equipo_computo(id)
 ) engine = InnoDB;
 
+-- Para las bases de datos ya existentes
+alter table equipo_programa add column estado int not null;
 
 
 
