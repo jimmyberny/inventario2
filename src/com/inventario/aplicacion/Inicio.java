@@ -83,6 +83,7 @@ public class Inicio {
 					}
 
 					Principal app = new Principal(cfg, factory);
+                    app.start(); // Comenzamos!
 					app.setVisible(true);
 				} catch (ClassNotFoundException |
 						IllegalAccessException |

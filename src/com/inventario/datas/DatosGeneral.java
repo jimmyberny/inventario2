@@ -19,6 +19,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -160,10 +161,10 @@ public class DatosGeneral implements AccesoDatos {
             }
         }.exec();
     }
-    
+
     public List<EquipoPrograma2> getVigenciasPorExpirar(final Date referencia) throws InventarioException {
         return (List<EquipoPrograma2>) new Transaccion(factory) {
-            
+
             @Override
             public Object execInTransaction(Session s, Object... params) throws InventarioException {
                 return s.createCriteria(EquipoPrograma2.class)
@@ -175,10 +176,10 @@ public class DatosGeneral implements AccesoDatos {
             }
         }.exec();
     }
-    
+
     public void guardarNotificaciones(final List<EquipoPrograma2> alertas, final List<Evento> notificaciones) throws InventarioException {
         new TransaccionSr(factory) {
-            
+
             @Override
             public void execInTransaction(Session s, Object... params) throws InventarioException {
                 for (EquipoPrograma2 ep : alertas) {
@@ -187,6 +188,38 @@ public class DatosGeneral implements AccesoDatos {
                 for (Evento ev : notificaciones) {
                     s.save(ev);
                 }
+            }
+        }.exec();
+    }
+
+    public EquipoComputo getEquipo(final String activoFijo) throws InventarioException {
+        return (EquipoComputo) new Transaccion(factory) {
+
+            @Override
+            public Object execInTransaction(Session s, Object... params) throws InventarioException {
+                return s.createCriteria(EquipoComputo.class)
+                        .add(Restrictions.eq("activoFijo", activoFijo))
+                        .setMaxResults(1)
+                        .uniqueResult();
+            }
+        }.exec();
+    }
+
+    public List<Evento> getEventos(final EquipoComputo equipo, final Boolean agenda) throws InventarioException {
+        return (List<Evento>) new Transaccion(factory) {
+
+            @Override
+            public Object execInTransaction(Session s, Object... params) throws InventarioException {
+                Criteria cr = s.createCriteria(Evento.class)
+                        .add(Restrictions.eq("equipo", equipo));
+                if (agenda) {
+                    cr.add(Restrictions.isNull("fechaRealizado"));
+
+                } else {
+                    cr.add(Restrictions.isNotNull("fechaRealizado"));
+                }
+                cr.addOrder(Order.asc("fecha"));
+                return cr.list();
             }
         }.exec();
     }

@@ -87,6 +87,11 @@ public class Principal extends javax.swing.JFrame implements Aplicacion, ActionL
 		jmiEventos.addActionListener(this);
         jmiInicio.setActionCommand(InventarioApp.INICIO);
         jmiInicio.addActionListener(this);
+        jmiConsulta.setActionCommand(InventarioApp.CONSULTA);
+        jmiConsulta.addActionListener(this);
+	}
+    
+    public void start() {
         
         // Para generar eventos automaticamente basados en las vigencia del software
         // El proceso depende de la configuración, por defecto son 5 dias.
@@ -94,7 +99,7 @@ public class Principal extends javax.swing.JFrame implements Aplicacion, ActionL
 
 		// Primera pantalla, el login
 		mostrarTarea(InventarioApp.LOGIN);
-	}
+    }
 
 	@Override
 	public final void mostrarTarea(String tarea) {
@@ -234,6 +239,7 @@ public class Principal extends javax.swing.JFrame implements Aplicacion, ActionL
         jmAplicacion = new javax.swing.JMenu();
         jmiInicio = new javax.swing.JMenuItem();
         jmiEventos = new javax.swing.JMenuItem();
+        jmiConsulta = new javax.swing.JMenuItem();
         jmAdmin = new javax.swing.JMenu();
         jmiAreas = new javax.swing.JMenuItem();
         jmiEmpleados = new javax.swing.JMenuItem();
@@ -306,6 +312,9 @@ public class Principal extends javax.swing.JFrame implements Aplicacion, ActionL
 
         jmiEventos.setText("Eventos");
         jmAplicacion.add(jmiEventos);
+
+        jmiConsulta.setText("Consulta");
+        jmAplicacion.add(jmiConsulta);
 
         jmbMenu.add(jmAplicacion);
 
@@ -384,6 +393,7 @@ public class Principal extends javax.swing.JFrame implements Aplicacion, ActionL
     private javax.swing.JMenuItem jmiAcercaDe;
     private javax.swing.JMenuItem jmiAreas;
     private javax.swing.JMenuItem jmiCerrar;
+    private javax.swing.JMenuItem jmiConsulta;
     private javax.swing.JMenuItem jmiEmpleados;
     private javax.swing.JMenuItem jmiEquipos;
     private javax.swing.JMenuItem jmiEventos;

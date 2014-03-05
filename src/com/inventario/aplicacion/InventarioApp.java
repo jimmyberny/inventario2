@@ -5,7 +5,7 @@ import com.inventario.util.OptionGroup;
 
 /**
  *
- * @author José Bernardo Gómez-Andrade
+ * @author None
  */
 public class InventarioApp {
 
@@ -26,6 +26,7 @@ public class InventarioApp {
     public static final String PREFERENCIAS = "com.inventario.aplicacion.gui.Preferencias";
     public static final String EVENTOS = "com.inventario.aplicacion.catalogos.EventoPanel";
     public static final String REPORTE = "com.inventario.aplicacion.gui.ReporteEvento";
+    public static final String CONSULTA = "com.inventario.aplicacion.gui.ConsultarEventos";
 
     // Claves de configuracion
     public static final String KC_DIAS_ALERTA = "aplicacion.diasalerta";
@@ -40,5 +41,5 @@ public class InventarioApp {
     public static final Option<String> MAN_PREVENTIVO = new Option<>("preventivo", "Mant. preventivo");
     public static final Option<String> MAN_CORRECTIVO = new Option<>("correctivo", "Mant. correctivo");
     public static final Option<String> EXT_LICENCIA = new Option<>("licencia", "Extender licencia");
-    public static final OptionGroup<String> MAN_TIPOS = new OptionGroup<>(LIMPIEZA, MAN_PREVENTIVO, MAN_CORRECTIVO);
+    public static final OptionGroup<String> MAN_TIPOS = new OptionGroup<>(LIMPIEZA, MAN_PREVENTIVO, MAN_CORRECTIVO, EXT_LICENCIA);
 }

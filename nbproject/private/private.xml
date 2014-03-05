@@ -6,12 +6,15 @@
         <group name="Motum"/>
         <group name="Factura"/>
         <group name="Bitacora"/>
+        <group name="Arsis"/>
         <group name="Otros">
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/ConsultarEventos.java</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/Principal.java</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/modelo/EquipoComputo.java</file>
             <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/Inicio.java</file>
             <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/InventarioApp.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/Login.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/Preferencias.java</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/datas/DatosGeneral.java</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/modelo/Evento.java</file>
         </group>
-        <group name="Arsis"/>
     </open-files>
 </project-private>
