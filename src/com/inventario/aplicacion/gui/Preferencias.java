@@ -1,5 +1,5 @@
 /**
- *  inventario | Mar 4, 2014 5:18:21 AM 
+ * inventario | Mar 4, 2014 5:18:21 AM
  */
 package com.inventario.aplicacion.gui;
 
@@ -30,7 +30,7 @@ import org.pushingpixels.substance.api.SubstanceSkin;
 import org.pushingpixels.substance.api.skin.SkinInfo;
 
 /**
- * 
+ *
  * @author Admin
  */
 public class Preferencias extends javax.swing.JPanel implements Vista {
@@ -38,12 +38,12 @@ public class Preferencias extends javax.swing.JPanel implements Vista {
     private Aplicacion app;
     private OptionListModel<LookAndFeelInfo, String> lafs;
     private MonitorListener monitor;
-    
+
     private Configuracion configuracion;
-    
+
     public Preferencias() {
         initComponents();
-        
+
         monitor = new MonitorListener();
         jlmCambios.addMonitor(monitor);
     }
@@ -51,8 +51,8 @@ public class Preferencias extends javax.swing.JPanel implements Vista {
     @Override
     public void inicializar(Aplicacion app) throws InventarioException {
         this.app = app;
-        
-        configuracion = ((Principal)app).getConfiguracion();
+
+        configuracion = ((Principal) app).getConfiguracion();
         //
         List<LookAndFeelInfo> lafis = new ArrayList<>(30);
         for (UIManager.LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels()) {
@@ -82,11 +82,11 @@ public class Preferencias extends javax.swing.JPanel implements Vista {
                 setLookAndFeel(lafs.getSelected());
             }
         });
-        
+
         monitor.listenTo(jtfDias);
-        
+
     }
-    
+
     private void setLookAndFeel(final LookAndFeelInfo lafInfo) {
         if (lafInfo != null
                 && !lafInfo.getId().equals(UIManager.getLookAndFeel().getClass().getName())) {
@@ -126,15 +126,14 @@ public class Preferencias extends javax.swing.JPanel implements Vista {
         // All green
         jtfDias.setText(configuracion.getProperty(InventarioApp.KC_DIAS_ALERTA));
         lafs.setSelectedById(configuracion.getProperty(InventarioApp.KC_LOOK_AND_FEEL));
-        
+
     }
 
     @Override
     public boolean ocultar() {
-        return !monitor.isDirty() || DialogoUtil.yes(this, "Hay cambios sin guardar. ¿Desea descartar los cambios?");
+        return !monitor.isDirty()
+                || DialogoUtil.yes(this, "Hay cambios sin guardar. ¿Desea descartar los cambios?");
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -216,9 +215,12 @@ public class Preferencias extends javax.swing.JPanel implements Vista {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         if (monitor.isDirty()) {
             try {
-                configuracion.getProperties().put(InventarioApp.KC_DIAS_ALERTA, 
-                        Format.INTEGER.parse(jtfDias.getText()));
-                configuracion.getProperties().put(InventarioApp.KC_LOOK_AND_FEEL, 
+                // Una validación sencilla
+                Format.INTEGER.parse(jtfDias.getText());
+                
+                //
+                configuracion.getProperties().put(InventarioApp.KC_DIAS_ALERTA, jtfDias.getText());
+                configuracion.getProperties().put(InventarioApp.KC_LOOK_AND_FEEL,
                         lafs.getSelectedId());
                 configuracion.guardar();
                 //
