@@ -1,10 +1,11 @@
 /**
- *  inventario | Mar 5, 2014 2:22:18 AM 
+ * inventario | Mar 5, 2014 2:22:18 AM
  */
 package com.inventario.aplicacion.catalogos;
 
 import com.inventario.aplicacion.InventarioApp;
 import com.inventario.aplicacion.buscadores.BuscadorEquipo;
+import com.inventario.datas.DatosGeneral;
 import com.inventario.error.InventarioException;
 import com.inventario.interfaces.Aplicacion;
 import com.inventario.interfaces.Editor;
@@ -13,37 +14,55 @@ import com.inventario.modelo.EquipoComputo;
 import com.inventario.modelo.Evento;
 import com.inventario.util.Format;
 import com.inventario.util.Option;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author None
  */
-public class EventoEditor extends Editor<Evento>{
+public class EventoEditor extends Editor<Evento> {
+
+    private static final Logger log = LoggerFactory.getLogger(EventoEditor.class);
+
+    private final Color alerta;
+    private final Color original; // Original
 
     private Aplicacion app;
-    
+    private DatosGeneral dGeneral;
+
     private Evento evento;
     private EquipoComputo equipo;
-    
+
     private Option.FixedOptionsModel<String> tipos = InventarioApp.MAN_TIPOS.getModel();
-    
+
     public EventoEditor(Aplicacion app, MonitorListener monitor) {
         initComponents();
         this.app = app;
-        
+        this.dGeneral = (DatosGeneral) app.getDatos(InventarioApp.AD_GENERAL);
+
         jcbFecha.setEditor(jtfFecha);
         jcbFecha.setMinSelectableDate(new Date()); // Justo ahora
         jcbxTipo.setModel(tipos);
-        
-        
+
         monitor.listenTo(jtfEquipo);
         monitor.listenTo(jcbFecha);
-        monitor.listenTo(jcbFecha);
+        monitor.listenTo(jtfEvento);
         monitor.listenTo(jtaIndicaciones);
         tipos.addListDataListener(monitor);
+
+        // Colores
+        alerta = new Color(160, 40, 40);
+        original = new Color(jtfEquipo.getBackground().getRGB());
+        
+        //
+        jtfEquipo.addKeyListener(new BusquedaListener());
     }
-    
+
     @Override
     public void initNoItem() {
         evento = null;
@@ -82,14 +101,14 @@ public class EventoEditor extends Editor<Evento>{
         evento.setObservaciones(""); // Empty string
         return evento;
     }
-    
+
     private void mostrar() {
-        jtfFecha.setText(evento.getTipo());
         equipo = evento.getEquipo();
         jtfEquipo.setText(Format.OBJECT.format(equipo));
-        tipos.setSelectedById(evento.getTipo());
-        
         jtfResponsable.setText(Format.OBJECT.format(evento.getEquipo().getEmpleado()));
+        jcbFecha.setDate(evento.getFecha());
+        
+        tipos.setSelectedById(evento.getTipo());
         jtfEvento.setText(evento.getNombre());
         jtaIndicaciones.setText(evento.getInstruccion());
     }
@@ -101,7 +120,7 @@ public class EventoEditor extends Editor<Evento>{
         jtfFecha.setEnabled(activo);
         jcbxTipo.setEnabled(activo);
         jtfEvento.setEnabled(activo);
-        
+
         jtaIndicaciones.setEnabled(activo);
     }
 
@@ -118,11 +137,32 @@ public class EventoEditor extends Editor<Evento>{
         jcbFecha.setDate(null);
         tipos.setSelected(null);
         jtfEvento.setText(null);
-        
+
         jtaIndicaciones.setText(null);
     }
-    
-    
+
+    private class BusquedaListener extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            log.info("{}, {}", e.getKeyCode(), jtfEquipo.getText());
+            if (!jtfEquipo.getText().trim().isEmpty() && e.getKeyCode() == KeyEvent.VK_ENTER) {
+                try {
+                    EquipoComputo equipo = dGeneral.getEquipo(jtfEquipo.getText());
+                    if (equipo != null) {
+                        jtfEquipo.setBackground(original);
+                        EventoEditor.this.equipo = equipo;
+                    } else {
+                        jbSetEquipo.doClick(); // Ok
+                    }
+                } catch (InventarioException ex) {
+                    log.error(ex.getMessage(), ex);
+                }
+            } else {
+                jtfEquipo.setBackground(alerta);
+            }
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -159,7 +199,6 @@ public class EventoEditor extends Editor<Evento>{
         jLabel3.setText("Responsable");
         jLabel3.setPreferredSize(new java.awt.Dimension(120, 26));
 
-        jtfEquipo.setEditable(false);
         jtfEquipo.setPreferredSize(new java.awt.Dimension(160, 26));
 
         jtfEvento.setPreferredSize(new java.awt.Dimension(160, 26));
@@ -259,11 +298,12 @@ public class EventoEditor extends Editor<Evento>{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSetEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSetEquipoActionPerformed
-        BuscadorEquipo be = BuscadorEquipo.mostrar(this, app);
+        BuscadorEquipo be = BuscadorEquipo.mostrar(this, app, jtfEquipo.getText());
         if (be.isAceptar()) {
             equipo = be.getItem();
             jtfEquipo.setText(Format.OBJECT.format(equipo));
             jtfResponsable.setText(Format.OBJECT.format(equipo.getEmpleado()));
+            jtfEquipo.setBackground(original);
         }
     }//GEN-LAST:event_jbSetEquipoActionPerformed
 

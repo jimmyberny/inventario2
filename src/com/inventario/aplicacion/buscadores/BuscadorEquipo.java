@@ -36,7 +36,7 @@ public class BuscadorEquipo extends Buscador<EquipoComputo> {
 		super(parent, modal);
 	}
 	
-	public static BuscadorEquipo mostrar(Component padre, Aplicacion app) {
+	public static BuscadorEquipo mostrar(Component padre, Aplicacion app, String activoFijo) {
 		BuscadorEquipo bt;
 		Window mw = SwingUtilities.getWindowAncestor(padre);
 		if (mw instanceof Frame) {
@@ -47,9 +47,16 @@ public class BuscadorEquipo extends Buscador<EquipoComputo> {
 		bt.initComponents();
 		bt.init(app);
 		bt.setLocationRelativeTo(padre);
+        
+        bt.buscar(activoFijo);
 		bt.setVisible(true);
 		return bt;
 	}
+    
+    private void buscar(String activoFijo) {
+        jtfActivoFijo.setText(activoFijo);
+        jbBuscar.doClick();
+    }
 	
 	private void init(Aplicacion app) {
 		dGeneral = (DatosGeneral) app.getDatos(InventarioApp.AD_GENERAL);
