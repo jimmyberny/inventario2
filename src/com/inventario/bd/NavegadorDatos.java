@@ -97,19 +97,19 @@ public class NavegadorDatos<T> {
                 case ACTUALIZAR: {
                     int i = modelo.modificar(indice, item);
                     editor.actualizar();
-                    indiceA(i);
+                    indiceA(SIN_POSICION);
                     break;
                 }
                 case INSERTAR: {
                     int i = modelo.registrar(item);
                     editor.actualizar();
-                    indiceA(i);
+                    indiceA(SIN_POSICION);
                     break;
                 }
                 case ELIMINAR: {
                     int i = modelo.borrar(indice);
                     editor.actualizar();
-                    indiceA(i);
+                    indiceA(SIN_POSICION);
                     break;
                 }
             }
