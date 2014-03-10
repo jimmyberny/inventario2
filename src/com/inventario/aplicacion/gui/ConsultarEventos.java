@@ -51,7 +51,7 @@ public class ConsultarEventos extends javax.swing.JPanel implements Vista {
 
     @Override
     public String getTitulo() {
-        return "Reportar evento";
+        return "Consultar información de equipo";
     }
 
     @Override
