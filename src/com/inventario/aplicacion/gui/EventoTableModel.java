@@ -29,6 +29,10 @@ public class EventoTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public boolean isEmpty() {
+        return items != null ? items.isEmpty() : true;
+    }
+
     public Evento getRow(int idx) {
         return items.get(idx);
     }

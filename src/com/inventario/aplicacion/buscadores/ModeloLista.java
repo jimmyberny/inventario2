@@ -29,6 +29,10 @@ public class ModeloLista<T> extends AbstractListModel<T> {
 		return items;
 	}
 
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
 	@Override
 	public int getSize() {
 		return items.size();

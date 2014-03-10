@@ -6,6 +6,9 @@ create table area (
 	nombre varchar(40) not null,
 	constraint pk_area primary key(id)
 ) engine = InnoDB;
+
+create unique index idx_area_nombre on area(nombre);
+
 insert into area values('1', 'Soporte técnico');
 
 create table empleado(
@@ -20,6 +23,9 @@ create table empleado(
 	-- id_usuario varchar(40) null,
 	-- contraint fk_e_u_usuario foreign key(id_usuario) references usuario(id)
 ) engine = InnoDB;
+
+create unique index idx_empleado_clave on empleado(clave);
+
 insert into empleado values('1', 'Zulma', '', '', 'USR01', '1');
 
 create table usuario(
@@ -29,6 +35,9 @@ create table usuario(
 	constraint pk_usuario primary key(id_empleado),
 	constraint fk_u_e_empleado foreign key(id_empleado) references empleado(id)
 ) engine = InnoDB;
+
+create unique index idx_usuario_usuario on usuario(usuario);
+
 insert into usuario values('1', 'zulma', 'zulma');
 
 create table tipo_equipo(
@@ -36,6 +45,8 @@ create table tipo_equipo(
 	nombre varchar(40) not null,
 	constraint pk_tipo_equipo primary key(id)
 ) engine = InnoDB;
+
+create unique index idx_tipo_equipo_nombre on tipo_equipo(nombre);
 
 create table equipo_computo(
 	id varchar(40) not null,
@@ -53,12 +64,16 @@ create table equipo_computo(
 	constraint fk_ec_e_empleado foreign key(id_empleado) references empleado(id)
 ) engine = InnoDB;
 
+create unique index idx_equipo_computo_ac on equipo_computo(activo_fijo);
+
 create table programa (
 	id varchar(40) not null,
 	nombre varchar(120) not null,
 	version varchar(120) not null,
 	constraint pk_programa primary key(id)
 ) engine = InnoDB;
+
+create unique index idx_programa on programa(nombre, version);
 
 create table equipo_programa (
     id varchar(40) not null,

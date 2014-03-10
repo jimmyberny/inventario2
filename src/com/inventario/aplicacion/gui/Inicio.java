@@ -66,6 +66,9 @@ public class Inicio extends javax.swing.JPanel implements Vista {
                     Format.DATETIME.format(inicio),
                     Format.DATETIME.format(fin));
             modelo.setItems(dGeneral.getPendientes(inicio, fin));
+            if (modelo.isEmpty()) {
+                new AppMensaje("No se encontraron resultados para la consulta.").mostrar(this);
+            }
         } catch (InventarioException ex) {
             new AppMensaje("No se pudo listar los eventos pendientes.", ex).mostrar(this);
         }

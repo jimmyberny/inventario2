@@ -151,7 +151,9 @@ public class BuscadorPrograma extends Buscador<Programa> {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 		try {
 			modelo.setItems(dGeneral.getProgramas(jtfNombre.getText()));
-			log.info("Modelo {}", modelo.getSize());
+			if (modelo.isEmpty()) {
+                new AppMensaje("No se encontraron resultados.").mostrar(this);
+            }
 		} catch (InventarioException ex) {
 			new AppMensaje("No se pudo consultar los programas", ex).mostrar(this);
 		}

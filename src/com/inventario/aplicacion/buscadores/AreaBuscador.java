@@ -22,43 +22,43 @@ import org.slf4j.LoggerFactory;
  * @author Enrique
  */
 public class AreaBuscador extends Buscador<Area> {
-	
-	private static final Logger log = LoggerFactory.getLogger(AreaBuscador.class);
-	
-	private DatosGeneral dGeneral;
-	
-	public AreaBuscador(Frame parent, boolean modal) {
-		super(parent, modal);
-	}
-	
-	public AreaBuscador(Dialog parent, boolean modal) {
-		super(parent, modal);
-	}
-	
-	public static AreaBuscador mostrar(Component padre, Aplicacion app) {
-		AreaBuscador ab;
-		Window mw = SwingUtilities.getWindowAncestor(padre);
-		if (mw instanceof Frame) {
-			ab = new AreaBuscador((Frame) mw, true);
-		} else {
-			ab = new AreaBuscador((Dialog) mw, true);
-		}
-		ab.initComponents();
-		ab.init(app);
-		ab.setLocationRelativeTo(padre);
-		ab.setVisible(true);
-		return ab;
-	}
-	
-	private void init(Aplicacion app) {
-		dGeneral = (DatosGeneral) app.getDatos(InventarioApp.AD_GENERAL);
 
-		// Settear
-		modelo = new ModeloLista<>();
-		jlAreas.setModel(modelo);
-	}
-	
-	@SuppressWarnings("unchecked")
+    private static final Logger log = LoggerFactory.getLogger(AreaBuscador.class);
+
+    private DatosGeneral dGeneral;
+
+    public AreaBuscador(Frame parent, boolean modal) {
+        super(parent, modal);
+    }
+
+    public AreaBuscador(Dialog parent, boolean modal) {
+        super(parent, modal);
+    }
+
+    public static AreaBuscador mostrar(Component padre, Aplicacion app) {
+        AreaBuscador ab;
+        Window mw = SwingUtilities.getWindowAncestor(padre);
+        if (mw instanceof Frame) {
+            ab = new AreaBuscador((Frame) mw, true);
+        } else {
+            ab = new AreaBuscador((Dialog) mw, true);
+        }
+        ab.initComponents();
+        ab.init(app);
+        ab.setLocationRelativeTo(padre);
+        ab.setVisible(true);
+        return ab;
+    }
+
+    private void init(Aplicacion app) {
+        dGeneral = (DatosGeneral) app.getDatos(InventarioApp.AD_GENERAL);
+
+        // Settear
+        modelo = new ModeloLista<>();
+        jlAreas.setModel(modelo);
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -149,24 +149,26 @@ public class AreaBuscador extends Buscador<Area> {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-		try {
-			modelo.setItems(dGeneral.getAreas(jtfNombre.getText()));
-			log.info("Modelo{}", modelo.getSize());
-		} catch (InventarioException ex) {
-			new AppMensaje("No se pudo consultar las areas", ex).mostrar(this);
-		}
+        try {
+            modelo.setItems(dGeneral.getAreas(jtfNombre.getText()));
+            if (modelo.isEmpty()) {
+                new AppMensaje("No se encontraron resultados.").mostrar(this);
+            }
+        } catch (InventarioException ex) {
+            new AppMensaje("No se pudo consultar las areas", ex).mostrar(this);
+        }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-		cancel();
+        cancel();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-		try {
-			aceptar(jlAreas.getSelectedIndex());
-		} catch (InventarioException ex) {
-			new AppMensaje(ex).mostrar(this);
-		}
+        try {
+            aceptar(jlAreas.getSelectedIndex());
+        } catch (InventarioException ex) {
+            new AppMensaje(ex).mostrar(this);
+        }
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

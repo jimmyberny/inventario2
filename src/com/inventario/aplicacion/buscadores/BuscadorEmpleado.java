@@ -151,7 +151,9 @@ public class BuscadorEmpleado extends Buscador<Empleado> {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 		try {
 			modelo.setItems(dGeneral.getEmpleados(jtfNombre.getText()));
-			log.info("Modelo {}", modelo.getSize());
+			if (modelo.isEmpty()) {
+                new AppMensaje("No se encontraron resultados.").mostrar(this);
+            }
 		} catch (InventarioException ex) {
 			new AppMensaje("No se pudo consultar los empleados", ex).mostrar(this);
 		}

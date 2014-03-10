@@ -64,6 +64,8 @@ public class ConsultarEventos extends javax.swing.JPanel implements Vista {
     }
     
     private void limpiar() {
+        jtfActivoFijo.setText(null);
+        
         jtfSerie.setText(null);
         jtfActivoFijo2.setText(null);
         jtfMarca.setText(null);
@@ -98,6 +100,8 @@ public class ConsultarEventos extends javax.swing.JPanel implements Vista {
                     // Buscar los eventos.
                     historia.setItems(dGeneral.getEventos(equipo, Boolean.FALSE));
                     agenda.setItems(dGeneral.getEventos(equipo, Boolean.TRUE));
+                } else {
+                    new AppMensaje(String.format("No se encontró ningun resultado para %s.", cad)).mostrar(this);
                 }
             } catch (InventarioException ex) {
                 new AppMensaje("No se ha podido completar la consulta.", ex).mostrar(this);
