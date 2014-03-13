@@ -35,6 +35,8 @@ public class Empleado implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_area")
     private Area area;
+    @Column
+    private String email;
 
     public Empleado() {
     }
@@ -85,6 +87,14 @@ public class Empleado implements Serializable {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

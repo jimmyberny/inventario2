@@ -6,16 +6,10 @@
         <group name="Motum"/>
         <group name="Factura"/>
         <group name="Bitacora"/>
-        <group name="Arsis"/>
         <group name="MotumFV"/>
         <group name="Otros">
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/catalogos/EventoEditor.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/Preferencias.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/CatalogoPanel.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/JPanelCtrlModelo.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/bd/NavegadorDatos.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/buscadores/BuscadorEquipo.java</file>
-            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/datas/DatosGeneral.java</file>
+            <file>file:/home/jimmy/work/itsh/zulma/inventario/src/com/inventario/aplicacion/gui/ConsultarEventos.java</file>
         </group>
+        <group name="Arsis"/>
     </open-files>
 </project-private>

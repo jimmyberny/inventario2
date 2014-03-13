@@ -30,6 +30,7 @@ public class EmpleadoEditor extends Editor<Empleado> {
 		monitor.listenTo(jtfMaterno);
 		monitor.listenTo(jtfClave);
 		monitor.listenTo(jtfArea);
+		monitor.listenTo(jtfEmail);
 	}
 
 	@Override
@@ -68,6 +69,7 @@ public class EmpleadoEditor extends Editor<Empleado> {
 		
 		jtfArea.setText(empleado.getArea().toString());
 		area = empleado.getArea();
+        jtfEmail.setText(empleado.getEmail());
 	}
 
 	@Override
@@ -79,6 +81,7 @@ public class EmpleadoEditor extends Editor<Empleado> {
 		if (empleado.getArea() != area) { // Si lo modificaron setealo
 			empleado.setArea(area);
 		}
+        empleado.setEmail(jtfEmail.getText());
 
 		return empleado;
 	}
@@ -91,6 +94,7 @@ public class EmpleadoEditor extends Editor<Empleado> {
 		jtfClave.setEnabled(activo);
 		jbRemoveArea.setEnabled(activo);
 		jbSetArea.setEnabled(activo);
+        jtfEmail.setEnabled(activo);
 	}
 
 	@Override
@@ -106,6 +110,7 @@ public class EmpleadoEditor extends Editor<Empleado> {
 		jtfClave.setText(null);
 		jtfArea.setText(null);
 		area = null;
+        jtfEmail.setText(null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -124,6 +129,8 @@ public class EmpleadoEditor extends Editor<Empleado> {
         jtfArea = new javax.swing.JTextField();
         jbSetArea = new javax.swing.JButton();
         jbRemoveArea = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jtfEmail = new javax.swing.JTextField();
 
         jLabel2.setText("Nombre");
         jLabel2.setPreferredSize(new java.awt.Dimension(140, 26));
@@ -167,6 +174,11 @@ public class EmpleadoEditor extends Editor<Empleado> {
             }
         });
 
+        jLabel7.setText("Correo electrónico");
+        jLabel7.setPreferredSize(new java.awt.Dimension(140, 26));
+
+        jtfEmail.setPreferredSize(new java.awt.Dimension(160, 26));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,7 +209,11 @@ public class EmpleadoEditor extends Editor<Empleado> {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbSetArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbRemoveArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbRemoveArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -221,11 +237,15 @@ public class EmpleadoEditor extends Editor<Empleado> {
                     .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbSetArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbRemoveArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -249,10 +269,12 @@ public class EmpleadoEditor extends Editor<Empleado> {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jbRemoveArea;
     private javax.swing.JButton jbSetArea;
     private javax.swing.JTextField jtfArea;
     private javax.swing.JTextField jtfClave;
+    private javax.swing.JTextField jtfEmail;
     private javax.swing.JTextField jtfMaterno;
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfPaterno;

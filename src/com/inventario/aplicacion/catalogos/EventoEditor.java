@@ -3,6 +3,7 @@
  */
 package com.inventario.aplicacion.catalogos;
 
+import com.inventario.aplicacion.AppMensaje;
 import com.inventario.aplicacion.InventarioApp;
 import com.inventario.aplicacion.buscadores.BuscadorEquipo;
 import com.inventario.datas.DatosGeneral;
@@ -12,12 +13,14 @@ import com.inventario.interfaces.Editor;
 import com.inventario.listener.MonitorListener;
 import com.inventario.modelo.EquipoComputo;
 import com.inventario.modelo.Evento;
+import com.inventario.modelo.Mensaje;
 import com.inventario.util.Format;
 import com.inventario.util.Option;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +61,7 @@ public class EventoEditor extends Editor<Evento> {
         // Colores
         alerta = new Color(160, 40, 40);
         original = new Color(jtfEquipo.getBackground().getRGB());
-        
+
         //
         jtfEquipo.addKeyListener(new BusquedaListener());
     }
@@ -107,7 +110,7 @@ public class EventoEditor extends Editor<Evento> {
         jtfEquipo.setText(Format.OBJECT.format(equipo));
         jtfResponsable.setText(Format.OBJECT.format(evento.getEquipo().getEmpleado()));
         jcbFecha.setDate(evento.getFecha());
-        
+
         tipos.setSelectedById(evento.getTipo());
         jtfEvento.setText(evento.getNombre());
         jtaIndicaciones.setText(evento.getInstruccion());
@@ -184,6 +187,8 @@ public class EventoEditor extends Editor<Evento> {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaIndicaciones = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        jbNotificar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -295,6 +300,21 @@ public class EventoEditor extends Editor<Evento> {
         jTabbedPane1.addTab("Indicaciones", jScrollPane1);
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(624, 34));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 2));
+
+        jbNotificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventario/iconos/mail_send.png"))); // NOI18N
+        jbNotificar.setText("Notificar por email");
+        jbNotificar.setPreferredSize(new java.awt.Dimension(160, 30));
+        jbNotificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNotificarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbNotificar);
+
+        add(jPanel2, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSetEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSetEquipoActionPerformed
@@ -307,6 +327,31 @@ public class EventoEditor extends Editor<Evento> {
         }
     }//GEN-LAST:event_jbSetEquipoActionPerformed
 
+    private void jbNotificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNotificarActionPerformed
+        // 
+        if (evento.getId() != null) {
+            try {
+                Mensaje msg = new Mensaje();
+                msg.setDestinatario(null);
+                msg.setAsunto(jtfEvento.getText());
+                msg.setMensaje(jtaIndicaciones.getText());
+                // 
+                app.enviarMensaje(msg);
+                if (equipo.getEmpleado() != null) {
+                    msg.setDestinatario(equipo.getEmpleado().getEmail());
+                    app.enviarMensaje(msg);
+                    new AppMensaje("Mensajes enviados. Uno para el usuario de la aplicación y otro para el encargado del equipo.").mostrar(this);
+                } else {
+                    new AppMensaje("Mensaje de notificación enviado").mostrar(this);
+                }
+            } catch (InventarioException ex) {
+                new AppMensaje(ex).mostrar(this);
+            }
+        } else {
+            new AppMensaje("No puede enviar notificación de un evento que no ha sido guardado.").mostrar(this);
+        }
+    }//GEN-LAST:event_jbNotificarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -314,8 +359,10 @@ public class EventoEditor extends Editor<Evento> {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton jbNotificar;
     private javax.swing.JButton jbSetEquipo;
     private com.inventario.gui.util.JCalendarButton jcbFecha;
     private javax.swing.JComboBox jcbxTipo;

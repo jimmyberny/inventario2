@@ -31,6 +31,12 @@ public class InventarioApp {
     // Claves de configuracion
     public static final String KC_DIAS_ALERTA = "aplicacion.diasalerta";
     public static final String KC_LOOK_AND_FEEL = "aplicacion.lookandfeel";
+    public static final String KC_SMTP_HOST = "mail.smtp.host";
+    public static final String KC_SMTP_PORT = "mail.smtp.port";
+    public static final String KC_SMTP_AUTH = "mail.smtp.auth";
+    public static final String KC_START_TLS = "mail.smtp.starttls.enable";
+    public static final String KC_EMAIL_USUARIO = "aplicacion.email.usuario";
+    public static final String KC_EMAIL_CLAVE = "aplicacion.email.clave";
     
     // Bus
     public static final String BUS_EVENTO = "bus.evento";

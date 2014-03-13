@@ -1,5 +1,7 @@
 package com.inventario.interfaces;
 
+import com.inventario.error.InventarioException;
+import com.inventario.modelo.Mensaje;
 import com.inventario.modelo.Usuario;
 import java.util.Map;
 import org.hibernate.SessionFactory;
@@ -21,4 +23,6 @@ public interface Aplicacion {
     public void mostrarTarea(String tarea);
     
     public Map<String, Object> getBus();
+    
+    public void enviarMensaje(Mensaje mensaje) throws InventarioException; // Esto no es apropiado
 }

@@ -18,6 +18,7 @@ create table empleado(
 	materno varchar(40) null,
 	clave int not null,
 	id_area varchar(40) not null,
+    email varchar(60) null,
 	constraint pk_empleado primary key(id),
 	constraint fk_e_a_area foreign key(id_area) references area(id)
 	-- id_usuario varchar(40) null,
@@ -101,6 +102,6 @@ create table evento (
 
 -- Para las bases de datos ya existentes
 alter table equipo_programa add column estado int not null;
-
+alter table empleado add column email varchar(60) null;
 
 

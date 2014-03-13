@@ -43,6 +43,9 @@ public final class Configuracion {
 
     private void cargarPorDefecto() {
         props.setProperty("saludos", "cordiales");
+        
+        props.setProperty(InventarioApp.KC_SMTP_AUTH, Boolean.TRUE.toString());
+        props.setProperty(InventarioApp.KC_START_TLS, Boolean.TRUE.toString());
     }
 
     public void guardar() throws InventarioException {
